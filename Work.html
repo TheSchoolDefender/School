@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Run Turtle</title>
+</head>
+<body>
+    <script>
+        function openWindow() {
+            const windowName = 'TURTLE' + Math.floor(Math.random() * 1000);
+            const newWindow = window.open('', windowName, 'width=10000,height=10000,resizable=0,alwaysRaised=yes');
+
+            if (!newWindow) {
+                alert("Popup blocked! Allow popups and try again.");
+                return;
+            }
+
+            newWindow.document.write('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToHc0R4K8D8m1Iu-P48UoMf5zWJOGzdPM2EQ&s" alt="turtle">');
+
+            newWindow.addEventListener('beforeunload', function () {
+                openWindow();
+            });
+
+            let x = Math.random() * (window.innerWidth - 300);
+            let y = Math.random() * (window.innerHeight - 200);
+            let xSpeed = 5;
+            let ySpeed = 5;
+
+            function moveWindow() {
+                x += xSpeed;
+                y += ySpeed;
+
+                if (x < 0 || x + 300 > window.innerWidth) {
+                    xSpeed *= -1;
+                }
+                if (y < 0 || y + 200 > window.innerHeight) {
+                    ySpeed *= -1;
+                }
+
+                if (x < 0) x = 0;
+                if (x + 300 > window.innerWidth) x = window.innerWidth - 300;
+                if (y < 0) y = 0;
+                if (y + 200 > window.innerHeight) y = window.innerHeight - 200;
+
+                newWindow.moveTo(x, y);
+                requestAnimationFrame(moveWindow);
+            }
+
+            moveWindow();
+        }
+
+        window.onload = function () {
+            setTimeout(openWindow, 3000);
+            setInterval(openWindow, 1000);
+
+            var win = window.open("secondwindow.html", "woo");
+
+            function pollWindow() {
+                try {
+                    if (win == null || win.closed) {
+                        openWindow();
+                    }
+                } catch (e) {}
+            }
+
+            setInterval(pollWindow, 1000);
+        };
+    </script>
+</body>
+</html>
